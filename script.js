@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     for (let j = 0; j < seatsPerRow; j++) {
       let seatImg = $("<img>", {
-        src: "https://e7.pngegg.com/pngimages/240/919/png-clipart-chair-computer-icons-cinema-seat-chair-angle-furniture-thumbnail.png",
+        src: "images/seat.png",
         alt: "Seat",
         class: "img-fluid seat mb-2 smaller-seat",
         title: "Seat ID: " + seatId, // This will be the content of the tooltip
