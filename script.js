@@ -17,6 +17,7 @@ $(document).ready(function () {
         src: "https://e7.pngegg.com/pngimages/240/919/png-clipart-chair-computer-icons-cinema-seat-chair-angle-furniture-thumbnail.png",
         alt: "Seat",
         class: "img-fluid seat mb-2 smaller-seat",
+        title: "Seat ID: " + seatId, // This will be the content of the tooltip
         "data-seat-id": seatId++,
       });
 
@@ -25,6 +26,8 @@ $(document).ready(function () {
 
     seatContainer.append(columnDiv);
   }
+
+  $(".seat").tooltip(); // Initialize bootstrap tooltip
 
   // ------------------ Seat Click Handling ------------------
 
