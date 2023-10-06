@@ -13,35 +13,59 @@ $(document).ready(function () {
     let columnDiv = $("<div>", { class: "col-md-2 mb-3" });
 
     for (let j = 0; j < seatsPerRow; j++) {
+      let seatContainer = $("<div>", { class: "seat-container" }); // New div to hold both image and ID
       let seatImg = $("<img>", {
         src: "images/seat.png",
         alt: "Seat",
         class: "img-fluid seat mb-2 smaller-seat",
-        title: "Seat ID: " + seatId, // This will be the content of the tooltip
-        "data-seat-id": seatId++,
+        "data-seat-id": seatId,
       });
+      let seatLabel = $("<span>", { class: "seat-label", text: seatId++ }); // New span for seat ID
 
-      columnDiv.append(seatImg);
+      seatContainer.append(seatLabel); // Append seat ID span to container
+      seatContainer.append(seatImg); // Append seat image to container
+      columnDiv.append(seatContainer); // Append container to column
     }
 
     seatContainer.append(columnDiv);
   }
 
-  $(".seat").tooltip(); // Initialize bootstrap tooltip
-
   // ------------------ Seat Click Handling ------------------
 
-  // Sample click event handler for seats
   $(".seat").click(function () {
     const seatId = $(this).data("seat-id");
+    $(this).toggleClass("selected");
 
-    // Call to backend API or other actions here
-    // For demonstration, we'll just alert the seat ID
-    alert("Seat ID: " + seatId + " clicked!");
+    const status = $(this).hasClass("selected") ? "booked" : "cancelled";
 
-    // Make an API call using jQuery
-    // $.post("/api/seat", { id: seatId }, function(response) {
-    //     // Handle response here
-    // });
+    // Set the form values
+    $("#seatId").val(seatId);
+    $("#status").val(status);
+
+    // Submit the form
+    $("#seatForm").submit();
   });
+
+  //   $(".seat").click(function () {
+  //     const seatId = $(this).data("seat-id");
+  //     $(this).toggleClass("selected");
+
+  //     const status = $(this).hasClass("selected") ? "booked" : "cancelled";
+
+  //     // POST request to Google Apps Script
+  //     $.ajax({
+  //       method: "POST",
+  //       url: "",
+  //       contentType: "application/json",
+  //       data: JSON.stringify({ seatId: seatId, status: status }),
+  //       dataType: "json",
+  //       success: function (response) {
+  //         alert(response);
+  //         console.log(response); // Handle success response
+  //       },
+  //       error: function (err) {
+  //         console.log(err); // Handle error response
+  //       },
+  //     });
+  //   });
 });
